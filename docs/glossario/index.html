@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glossário — ERP Contábil (Rodadas 1–10)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #121417; color: #e6edf3; line-height: 1.5; }
+    h1 { color: #79c0ff; margin-bottom: 0.25rem; }
+    .meta { color: #8b949e; margin-bottom: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; background: #161b22; }
+    th, td { border: 1px solid #30363d; padding: 0.75rem; text-align: left; vertical-align: top; }
+    th { background: #21262d; color: #f0f6fc; }
+    code { background: #21262d; padding: 0.15rem 0.35rem; border-radius: 4px; color: #a5d6ff; }
+  </style>
+</head>
+<body>
+  <h1>Glossário da Linguagem Onipresente — ERP Contábil</h1>
+  <p class="meta">Contexto: <code>/cadastro</code> (schema <code>cadastro</code>) • Estudo de monolito modular • Código de negócio aguardando partida</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Termo</th>
+        <th>Classificação</th>
+        <th>Definição</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>TenantId</code> / <code>Escritório</code></td>
+        <td>Escopo Multi-Tenant</td>
+        <td>Identifica o escritório contábil dono dos dados e isola acesso, consultas, eventos e auditoria.</td>
+      </tr>
+      <tr>
+        <td><code>Empresa</code> / <code>EmpresaId</code></td>
+        <td>Raiz de Agregado</td>
+        <td>Entidade contribuinte do escritório; impõe invariantes internas de forma síncrona.</td>
+      </tr>
+      <tr>
+        <td><code>Certificado</code></td>
+        <td>Raiz de Agregado</td>
+        <td>Certificado digital A1; armazena apenas <code>ReferenciaSegredoCertificado</code> e metadados (nunca <code>.pfx</code>/<code>.p12</code> ou senhas).</td>
+      </tr>
+      <tr>
+        <td><code>ProcuracaoEletronica</code></td>
+        <td>Raiz de Agregado</td>
+        <td>Representa outorga/poderes dentro de uma <code>Vigencia</code>, sujeita a pontos <code>[VALIDAR_CONTADOR]</code>.</td>
+      </tr>
+      <tr>
+        <td><code>Vigencia</code></td>
+        <td>Objeto de Valor</td>
+        <td>Intervalo de datas com início e fim opcional; valida coerência e suporta operações fechadas do tipo.</td>
+      </tr>
+      <tr>
+        <td><code>Competencia</code></td>
+        <td>Objeto de Valor</td>
+        <td>Período contábil/fiscal no formato <code>AAAA-MM</code>.</td>
+      </tr>
+      <tr>
+        <td><code>DocumentoFiscal</code></td>
+        <td>Objeto de Valor</td>
+        <td>Documento fiscal (<code>CNPJ</code>/<code>CPF</code>) com validação e mascaramento conforme LGPD.</td>
+      </tr>
+      <tr>
+        <td><code>VinculoEmpresaEncerrado</code></td>
+        <td>Regra Tácita / Evento</td>
+        <td>Suspende uso operacional ativo e novos alertas no Zimbra, mantendo histórico e auditoria em leitura.</td>
+      </tr>
+      <tr>
+        <td><code>correlation_id</code> &amp; <code>Idempotency-Key</code></td>
+        <td>Rastreabilidade / Resiliência</td>
+        <td>Rastreia operações ponta a ponta e garante idempotência contra reenvios e reentregas.</td>
+      </tr>
+      <tr>
+        <td><code>Outbox</code> &amp; <code>DLQ</code></td>
+        <td>Integração Assíncrona</td>
+        <td>Publica eventos sem acoplamento síncrono entre módulos e isola falhas persistentes.</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
